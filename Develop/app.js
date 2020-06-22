@@ -10,52 +10,12 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-class Employee {
-	constructor(name, id, email) {
-	this.name = name;
-	this.id = id;
-	this.email = email;
-	}
-	getName() {
-		return this.name;
-	}
-	getId() {
-		return this.id;
-	}
-	getEmail() {
-		return this.email;
-	}
-	getRole() {
-		return this.getRole;
-	}
-}
+const jesse = new Engineer('Jesse', 1, 'rootmazur@gmail.com', 'Jmantis0');
+console.log(jesse);
 
-class Manager extends Employee {
-	constructor(officeNumber) {
-		this.officeNumber = officeNumber;
-	}
-	getRole() {
-		return 'Manager';
-	}
-}
 
-class Engineer extends Employee {
-	constructor(github) {
-		this.github = github;
-	}
-	getRole() {
-		return 'Engineer';
-	}
-}
 
-class Intern extends Employee {
-	constructor(school) {
-		this.school = school;
-	}
-	getRole() {
-		return 'Intern';
-	}
-}
+
 
 
 // Write code to use inquirer to gather information about the development team members,
