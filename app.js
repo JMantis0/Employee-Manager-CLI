@@ -10,6 +10,43 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let inqNewEmp = [
+	{
+		type: 'confirm',
+		name: 'addAnother',
+		message: 'Add another employee?'
+	}
+];
+
+let empType = [
+	{
+		type: 'list',
+		name: 'empType',
+		message: 'What kind of employee are you adding?',
+		choices: ['Manager', 'Engineer', 'Intern']
+	}
+]
+
+let empData = [
+	{
+		type: 'input',
+		name: 'name',
+		message: 'Enter the employee\'s name: '
+	},
+	{
+		type: 'input',
+		name: 'id',
+		message: 'Enter the employee\'s id: '
+	},
+	{
+		type: 'input',
+		name: 'email',
+		message: 'Enter the employee\'s email address: '
+	}
+]
+
+
+
 const jesse = new Engineer('Jesse', 1, 'rootmazur@gmail.com', 'Jmantis0');
 console.log(jesse);
 
