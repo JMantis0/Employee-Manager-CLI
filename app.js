@@ -10,6 +10,9 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let empArr = [];
+let addMore = true;
+
 //  Inquirer object that prompts whether to add another employee.
 let inqNewEmp = [
 	{
@@ -17,6 +20,7 @@ let inqNewEmp = [
 		name: 'addAnother',
 		message: 'Add another employee?'
 	}
+
 ];
 
 //  Inquirer object that prompts what type of employee to add.
@@ -24,83 +28,151 @@ let inqEmpType = [
 	{
 		type: 'list',
 		name: 'empType',
-		message: 'What kind of employee are you adding?',
-		choices: ['Manager', 'Engineer', 'Intern']
+		message: 'Select:',
+		choices: ['Engineer', 'Intern']
+	}
+
+];
+
+let inqEngineerData = [
+	{
+		type: 'input',
+		name: 'name',
+		message: `Name: `
+	},
+	{
+		type: 'input',
+		name: 'id',
+		message: `Employee ID: `
+	},
+	{
+		type: 'input',
+		name: 'email',
+		message: `Email address: `
+	},
+	{
+		type: 'input',
+		name: 'gitHub',
+		message: 'GitHub: '
 	}
 ];
-//  Initial inquiry gets employee type to add
-inquirer.prompt(inqEmpType).then(answer => {
-	console.log(answer);
-	//  Prepare next inquiry
-	let inqEmpData = [
-		{
-			type: 'input',
-			name: 'name',
-			message: `Enter the ${answer.empType}\'s name: `
-		},
-		{
-			type: 'input',
-			name: 'id',
-			message: `Enter the ${answer.empType}\'s id: `
-		},
-		{
-			type: 'input',
-			name: 'email',
-			message: `Enter the ${answer.empType}\'s email address: `
-		}
-	];
 
-	let inqOfficeNumber = 
-		{
-			type: 'input',
-			name: 'officeNum',
-			message: 'Enter the Manager\'s office number: '
-		};
-	
-	let inqGitHub = 
-		{
-			type: 'input',
-			name: 'gitHub',
-			message: 'Enter the Engineer\'s GitHub: '
-		};
-	
-	let inqSchool = 
-		{
-			type: 'input',
-			name: 'school',
-			message: 'Enter the Intern\'s School: '
-		};
-
-	switch(answer.empType) {
-	case "Manager":
-		inqEmpData.push(inqOfficeNumber);
-		break;
-	case "Engineer":
-		inqEmpData.push(inqGitHub);
-		break;
-	case "Intern":
-		inqEmpData.push(inqSchool);
-		break;
+let inqInternData = [
+	{
+		type: 'input',
+		name: 'name',
+		message: `Name: `
+	},
+	{
+		type: 'input',
+		name: 'id',
+		message: `Employee ID: `
+	},
+	{
+		type: 'input',
+		name: 'email',
+		message: `Email address: `
+	},
+	{
+		type: 'input',
+		name: 'school',
+		message: 'School: '
 	}
-	console.log(inqEmpData);
-	inquirer.prompt(inqEmpData).then(answer2 => {
-		console.log(answer2);
-		let newEmployee;
-		switch(answer.empType) {
-			case "Manager":
-				newEmployee = new Manager(answer2.name, answer2.id, answer2.email, answer2.officeNum);
-				break;
+];
+
+
+
+let inqManager = [
+	{
+		type: 'input',
+		name: 'name',
+		message: 'Full name: '
+	},
+	{
+		type: 'input',
+		name: 'id',
+		message: `Employee ID: `
+	},
+	{
+		type: 'input',
+		name: 'email',
+		message: `Email address: `
+	},
+	{
+		type: 'input',
+		name: 'officeNum',
+		message: 'Office telephone number: '	
+	}
+
+];
+
+console.log('Enter the team Manager\'s information: ');
+
+//  FIRST inquirer prompt adds for manager.
+inquirer.prompt(inqManager)
+.then(answer => {
+	empArr.push(new Manager(answer.name, answer.id, answer.email, answer.officeNum));
+	//  SECOND inquirer prompt gets type for next employee
+	while(addMore) {
+		console.log(`What type of employee would you like to add to ${empArr[0].name}'s team?`)
+		inquirer.prompt(inqEmpType).then(answer2 => {
+		
+				//  Switch pushes inquiry object to array according to type;
+			let promptType;
+			switch(answer2.empType) {
 			case "Engineer":
-				newEmployee = new Engineer(answer2.name, answer2.id, answer2.email, answer2.gitHub);
+				promptType = inqEngineerData;
 				break;
 			case "Intern":
-				newEmployee = new Intern(answer2.name, answer2.id, answer2.email, answer2.school);
+				promptType = inqInternData;
 				break;
-		}
-		console.log(newEmployee);
-	})
-})
+			}
+			//  THIRD inquirer prompt collects teammate's information and adds it to empArr
+			console.log(`Enter the ${answer2.empType}'s information: `)
+			inquirer.prompt(promptType)
+			.then(answer3 => {
+				console.log(answer3);
+				switch(answer2.empType) {
+					case "Engineer":
+						empArr.push(new Engineer(answer3.name, answer3.id, answer3.email, answer3.gitHub));
+						break;
+					case "Intern":
+						empArr.push(new Intern(answer3.name, answer3.id, answer3.email, answer3.school));
+						break;
+				}
+				console.log(empArr);
+				// FOURTH inquirer prompt asks whether to add more employee.
+				inquirer.prompt(inqNewEmp)
+				.then(answer4 => {
+					addMore = answer4.addAnother;
+				})
+				.catch(error => {
+					if (error) {
+						console.log(error);
+					}
+				});
+			})
+			.catch(error => {
+				if (error) {
+					console.log(error);
+				}
+			});;
+		})
+		.catch(error => {
+			if (error) {
+				console.log(error);
+			}
+		});;
+	}
+}).catch(error => {
+	if (error) {
+		console.log(error);
+	}
+});
 
+function inquiryFour() {
+
+}
 
 
 //  Inquirer object that prompts for employee information
@@ -110,9 +182,10 @@ function askForAddEmployee() {
 	.then(answer => {
 		console.log(answer.addAnother)
 		if(answer.addAnother) {
-			askForEmpType();
+			
 		}
 		else {
+			addMore = false;
 			console.log("No more employees");
 		}
 	})
