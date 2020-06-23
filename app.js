@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//  Inquirer object that prompts whether to add another employee.
 let inqNewEmp = [
 	{
 		type: 'confirm',
@@ -18,39 +19,109 @@ let inqNewEmp = [
 	}
 ];
 
-let empType = [
+//  Inquirer object that prompts what type of employee to add.
+let inqEmpType = [
 	{
 		type: 'list',
 		name: 'empType',
 		message: 'What kind of employee are you adding?',
 		choices: ['Manager', 'Engineer', 'Intern']
 	}
-]
+];
+//  Initial inquiry gets employee type to add
+inquirer.prompt(inqEmpType).then(answer => {
+	console.log(answer);
+	//  Prepare next inquiry
+	let inqEmpData = [
+		{
+			type: 'input',
+			name: 'name',
+			message: `Enter the ${answer.empType}\'s name: `
+		},
+		{
+			type: 'input',
+			name: 'id',
+			message: `Enter the ${answer.empType}\'s id: `
+		},
+		{
+			type: 'input',
+			name: 'email',
+			message: `Enter the ${answer.empType}\'s email address: `
+		}
+	];
 
-let empData = [
-	{
-		type: 'input',
-		name: 'name',
-		message: 'Enter the employee\'s name: '
-	},
-	{
-		type: 'input',
-		name: 'id',
-		message: 'Enter the employee\'s id: '
-	},
-	{
-		type: 'input',
-		name: 'email',
-		message: 'Enter the employee\'s email address: '
+	let inqOfficeNumber = 
+		{
+			type: 'input',
+			name: 'officeNum',
+			message: 'Enter the Manager\'s office number: '
+		};
+	
+	let inqGitHub = 
+		{
+			type: 'input',
+			name: 'gitHub',
+			message: 'Enter the Engineer\'s GitHub: '
+		};
+	
+	let inqSchool = 
+		{
+			type: 'input',
+			name: 'school',
+			message: 'Enter the Intern\'s School: '
+		};
+
+	switch(answer.empType) {
+	case "Manager":
+		inqEmpData.push(inqOfficeNumber);
+		break;
+	case "Engineer":
+		inqEmpData.push(inqGitHub);
+		break;
+	case "Intern":
+		inqEmpData.push(inqSchool);
+		break;
 	}
-]
+	console.log(inqEmpData);
+	inquirer.prompt(inqEmpData).then(answer2 => {
+		console.log(answer2);
+		let newEmployee;
+		switch(answer.empType) {
+			case "Manager":
+				newEmployee = new Manager(answer2.name, answer2.id, answer2.email, answer2.officeNum);
+				break;
+			case "Engineer":
+				newEmployee = new Engineer(answer2.name, answer2.id, answer2.email, answer2.gitHub);
+				break;
+			case "Intern":
+				newEmployee = new Intern(answer2.name, answer2.id, answer2.email, answer2.school);
+				break;
+		}
+		console.log(newEmployee);
+	})
+})
 
 
 
-const jesse = new Engineer('Jesse', 1, 'rootmazur@gmail.com', 'Jmantis0');
-console.log(jesse);
+//  Inquirer object that prompts for employee information
 
-
+function askForAddEmployee() {
+	inquirer.prompt(inqNewEmp)
+	.then(answer => {
+		console.log(answer.addAnother)
+		if(answer.addAnother) {
+			askForEmpType();
+		}
+		else {
+			console.log("No more employees");
+		}
+	})
+	.catch(error => {
+		if (error) {
+			console.log(error);
+		}
+	});
+}
 
 
 
