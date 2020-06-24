@@ -12,6 +12,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const { create } = require("domain");
 const { get } = require("https");
+const { Console } = require("console");
 
 let empArr = [];
 let addMore = true;
@@ -22,13 +23,12 @@ async function getTypeToAdd() {
 		{
 			type: 'list',
 			name: 'empType',
-			message: 'Select:',
-			choices: [chalk.yellow('Engineer'), chalk.green('Intern')]
+			message: 'Choose an employee role:\n',
+			choices: [new inquirer.Separator(), chalk.yellow.bold('Engineer'), new inquirer.Separator(), chalk.green.bold('Intern'), new inquirer.Separator()]
 		}
 	];
 
 	let {empType} = await inquirer.prompt(tprompt);
-	console.log(empType)
 	return empType;
 }
 
@@ -37,11 +37,10 @@ async function addAnother() {
 		{
 			type: 'confirm',
 			name: 'addAnother',
-			message: 'Add another employee?'
+			message: 'Add another employee?\n'
 		}
 	];
 	let {addAnother} = await inquirer.prompt(aprompt);
-	console.log(addAnother);
 	return addAnother;
 
 }
@@ -51,30 +50,29 @@ async function createEngineer() {
 		{
 			type: 'input',
 			name: 'name',
-			message: `Name: `
+			message: chalk.bold.yellow(`Name:\n`)
 		},
 		{
 			type: 'input',
 			name: 'id',
-			message: `Employee ID: `
+			message: chalk.bold.yellow(`Employee ID:\n`)
 		},
 		{
 			type: 'input',
 			name: 'email',
-			message: `Email address: `
+			message: chalk.bold.yellow(`Email address:\n`)
 		},
 		{
 			type: 'input',
 			name: 'gitHub',
-			message: 'GitHub: '
+			message: chalk.bold.yellow('GitHub:\n')
 		}
 	];
 
-	console.log("Enter your Engineer's information");
+	console.log(chalk.bold(`\nEnter your ${chalk.yellow("Engineer's")} information`));
 	let {name, id, email, gitHub} = await inquirer.prompt(eprompt);
 	empArr.push(new Engineer(name, id, email, gitHub));
-	console.log('Engineer added.');
-	console.log(empArr);
+	console.log(`\n* ${chalk.bold.yellow("Engineer")} added.\n`);
 
 }
 
@@ -83,30 +81,30 @@ async function createIntern() {
 		{
 			type: 'input',
 			name: 'name',
-			message: chalk.green(`Name: `)
+			message: chalk.green(`Name:\n`)
 		},
 		{
 			type: 'input',
 			name: 'id',
-			message: chalk.green(`Employee ID: `)
+			message: chalk.green(`Employee ID:\n`)
 		},
 		{
 			type: 'input',
 			name: 'email',
-			message: chalk.green(`Email address: `)
+			message: chalk.green(`Email address:\n`)
 		},
 		{
 			type: 'input',
 			name: 'school',
-			message: chalk.green('School: ')
+			message: chalk.green('School:\n')
 		}
 	];
 
-	console.log(chalk.bold(`Enter your ${chalk.green(`Intern's`)} information`));
+	console.log(chalk.bold(`\nEnter your ${chalk.green(`Intern's`)} information`));
 	let {name, id, email, school} = await inquirer.prompt(iprompt);
 	empArr.push(new Intern(name, id, email, school));
-	console.log('Intern added.')
-	console.log(empArr);
+	console.log(chalk.bold(`\n* ${chalk.green("Intern")} added.\n`));
+
 }
 
 async function createManager() {
@@ -114,41 +112,48 @@ async function createManager() {
 		{
 			type: 'input',
 			name: 'name',
-			message: chalk.red('Full name: ')
+			message: chalk.red('Full name:\n')
 		},
 		{
 			type: 'input',
 			name: 'id',
-			message: chalk.red(`Employee ID: `)
+			message: chalk.red(`Employee ID:\n`)
 		},
 		{
 			type: 'input',
 			name: 'email',
-			message: chalk.red(`Email address: `)
+			message: chalk.red(`Email address:\n`)
 		},
 		{
 			type: 'input',
 			name: 'officeNum',
-			message: chalk.red('Office telephone number: ')
+			message: chalk.red('Office telephone number:\n')
 		}
 	];
 
-	console.log(chalk.bold(`Enter the team ${chalk.red(`Manager's`)} information"`))
+	console.log(chalk.bold(`Enter the team ${chalk.red(`Manager's`)} information`))
 	let {name, id, email, officeNum} = await inquirer.prompt(mprompt);
 	empArr.push(new Manager(name, id, email, officeNum));
-	console.log('Manager added');
-	console.log(empArr);
+	console.log(`\n* ${chalk.red.bold("Manager")} added.\n`);
+}
+
+function greeting() {
+	console.clear();
+	console.log("---------------------------------------------------------");
+	console.log(chalk.bold("WELCOME to the EMPLOYEE MANAGEMENT COMMAND LINE INTERFACE"));
+	console.log("---------------------------------------------------------\n");
 }
 
 async function init() {
+	greeting();
 	await createManager();
 
 	while(await addAnother()) {
 		switch(await getTypeToAdd()) {
-			case chalk.yellow('Engineer'):
+			case chalk.yellow.bold('Engineer'):
 				await createEngineer();
 				break;
-			case chalk.green("Intern"):
+			case chalk.green.bold("Intern"):
 				await createIntern();
 				break;
 		}
