@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const { create } = require("domain");
+const { get } = require("https");
 
 let empArr = [];
 let addMore = true;
@@ -24,8 +25,9 @@ async function getTypeToAdd() {
 		}
 	];
 
-	let type = await inquirer.prompt(tprompt);
-	return type;
+	let {empType} = await inquirer.prompt(tprompt);
+	console.log(empType)
+	return empType;
 }
 
 async function addAnother() {
@@ -36,9 +38,9 @@ async function addAnother() {
 			message: 'Add another employee?'
 		}
 	];
-	let oneMore = await inquirer.prompt(aprompt);
-	console.log(oneMore);
-	return oneMore;
+	let {addAnother} = await inquirer.prompt(aprompt);
+	console.log(addAnother);
+	return addAnother;
 
 }
 
@@ -138,8 +140,18 @@ async function createManager() {
 
 async function init() {
 	await createManager();
-	await createEngineer();
-	await createIntern();
+
+	while(await addAnother()) {
+		switch(await getTypeToAdd()) {
+			case "Engineer":
+				await createEngineer();
+				break;
+			case "Intern":
+				await createIntern();
+				break;
+		}
+	}
+
 }
 
 init();
