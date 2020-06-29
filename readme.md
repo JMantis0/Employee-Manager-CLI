@@ -2,6 +2,8 @@
 # Employee Manager CLI
 ![GitHub repo size](https://img.shields.io/github/repo-size/JMantis0/Employee-Manager-CLI)  ![GitHub language count](https://img.shields.io/github/languages/count/JMantis0/Employee-Manager-CLI)  ![GitHub top language](https://img.shields.io/github/languages/top/JMantis0/Employee-Manager-CLI)  
 
+![screenshot](./Assets/images/cli.jpg)
+
 ## Getting Started
 
 This is the official EMPLOYEE MANAGER CLI for use to draft Development Teams quickly and generate a Website of it's roster.
@@ -21,6 +23,8 @@ Then run `node app.js` to run the program.  Begin drafting your Developemt team;
 ## Usage
 
 Enter Manager details and then add more employees to the Roster.  The team's HTML page is saved in the output folder when you are done adding employees.
+
+![screenshot2](.Assets/images/htmlShot.JPG)
 
 
 ## Contributing
