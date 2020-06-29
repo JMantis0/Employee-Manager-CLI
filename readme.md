@@ -6,14 +6,6 @@
 
 This is the official EMPLOYEE MANAGER CLI for use to draft Development Teams quickly and generate a Website of it's roster.
 
-## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Credits](#credits)
-* [License](#license)
-* [Contributing](#contributing)
-* [Tests](#tests)
-
 ## Installation
 
 To set up run these commands: 
