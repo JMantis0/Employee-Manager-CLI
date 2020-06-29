@@ -15,8 +15,6 @@ const { get } = require("https");
 const { Console } = require("console");
 
 let empArr = [];
-let addMore = true;
-console.log(OUTPUT_DIR, outputPath)
 
 async function getTypeToAdd() {
 	let tprompt = [
@@ -35,12 +33,20 @@ async function getTypeToAdd() {
 async function addAnother() {
 	let aprompt = [
 		{
-			type: 'confirm',
+			type: 'list',
 			name: 'addAnother',
-			message: 'Add another employee?\n'
+			message: 'Add another employee?\n',
+			choices: [chalk.bold.green('Yes'), chalk.bold.red('No')]
 		}
 	];
+
 	let {addAnother} = await inquirer.prompt(aprompt);
+	if (addAnother === aprompt[0].choices[0]) {
+		addAnother = true;
+	}
+	else {
+		addAnother = false;
+	}
 	return addAnother;
 
 }
@@ -158,7 +164,12 @@ async function init() {
 				break;
 		}
 	}
-	fs.writeFileSync(outputPath, render(empArr), "utf-8");
+	fs.writeFile(outputPath, render(empArr), "utf-8", function(err) {
+		if (err){
+			console.log(err);
+		}
+		console.log(chalk.bold.inverse("-------------------------------------\nSaved 'team.html' to output directory\n-------------------------------------"));
+	});
 }
 
 init();
