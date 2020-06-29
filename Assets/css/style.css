@@ -1,0 +1,42 @@
+.team-heading {
+	background-image: linear-gradient(#b9ffb9, rgb(43, 220, 108));
+  box-shadow: 0 10px 40px rgb(23, 32, 90);
+	border-bottom: 2px solid #2a3cad;
+	font-family: 'Comfortaa', cursive;
+	
+}
+.card-header {
+	background: linear-gradient(#b9ffb9, rgb(43, 220, 108));
+  box-shadow: 0 20px 50px rgb(23, 32, 90);
+	border: 2px solid #2a3cad;
+	border-bottom: 0px;
+	border-top-left-radius: 20px!important;
+	border-top-right-radius: 20px!important;
+	font-family: 'Comfortaa', cursive;
+}
+
+.card {
+	border: none;
+	background-color: transparent;
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-family: 'Teko', sans-serif;
+}
+
+
+.card-body {
+	background-color: rgb(252, 238, 133);
+  box-shadow: 0 20px 50px rgb(23, 32, 90);
+	border: 2px solid #2a3cad;
+	font-family: 'Comfortaa', cursive;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.list-group-item {
+	background-image: linear-gradient(#d3d3d3,#a1a1a1);
+}
+
+

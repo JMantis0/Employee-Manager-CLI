@@ -2,29 +2,34 @@
 # Employee Manager CLI
 ![GitHub repo size](https://img.shields.io/github/repo-size/JMantis0/Employee-Manager-CLI)  ![GitHub language count](https://img.shields.io/github/languages/count/JMantis0/Employee-Manager-CLI)  ![GitHub top language](https://img.shields.io/github/languages/top/JMantis0/Employee-Manager-CLI)  
 
-## Description
+![screenshot](./Assets/images/cli.JPG)
 
-Command Line Interface that helps managers manage employee data and create nice-looking team displays.
+## Getting Started
 
-## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Credits](#credits)
-* [License](#license)
-* [Contributing](#contributing)
-* [Tests](#tests)
+This is the official EMPLOYEE MANAGER CLI for use to draft Development Teams quickly and generate a Website of it's roster.
 
 ## Installation
 
+To set up run these commands: 
 
+```
+git clone https://github.com/JMantis0/Employee-Manager-CLI project
+cd project
+npm install
+```
+
+Then run `node app.js` to run the program.  Begin drafting your Developemt team; a prompt will appear on your command line.
 
 ## Usage
 
+Enter Manager details and then add more employees to the Roster.  The team's HTML page is saved in the output folder when you are done adding employees.
+
+![screenshot2](./Assets/images/htmlShot.JPG)
 
 
-## Credits
+## Contributing
 
-
+Feel free to leave issues on repo
 
 ## License
 
@@ -48,15 +53,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Contributing
-
-
-
-## Tests
-
-
-
-## Questions
-
-
