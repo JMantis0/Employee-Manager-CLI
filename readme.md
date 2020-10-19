@@ -4,6 +4,12 @@
 
 ![screenshot](./Assets/images/cli.JPG)
 
+## Concepts within
+
+- Javascript Classes
+- npm inquirer
+- 
+
 ## Getting Started
 
 This is the official EMPLOYEE MANAGER CLI for use to draft Development Teams quickly and generate a Website of it's roster.
