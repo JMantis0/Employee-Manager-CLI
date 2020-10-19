@@ -1,4 +1,3 @@
-
 # Employee Manager CLI
 ![GitHub repo size](https://img.shields.io/github/repo-size/JMantis0/Employee-Manager-CLI)  ![GitHub language count](https://img.shields.io/github/languages/count/JMantis0/Employee-Manager-CLI)  ![GitHub top language](https://img.shields.io/github/languages/top/JMantis0/Employee-Manager-CLI)  
 
@@ -9,6 +8,21 @@
 - Javascript Classes
 - npm inquirer
 - 
+
+## Getting Started
+
+This is the official EMPLOYEE MANAGER CLI for use to draft Development Teams quickly and generate a Website of it's roster.
+
+## Installation
+
+To set up run these commands: 
+
+```=======
+
+# Employee Manager CLI
+![GitHub repo size](https://img.shields.io/github/repo-size/JMantis0/Employee-Manager-CLI)  ![GitHub language count](https://img.shields.io/github/languages/count/JMantis0/Employee-Manager-CLI)  ![GitHub top language](https://img.shields.io/github/languages/top/JMantis0/Employee-Manager-CLI)  
+
+![screenshot](./Assets/images/cli.JPG)
 
 ## Getting Started
 
@@ -38,6 +52,10 @@ Enter Manager details and then add more employees to the Roster.  The team's HTM
 Feel free to leave issues on repo
 
 ## License
+
+## Concepts with-in:
+
+OBJECTS, Inquirer.  Also see 
 
 
 Copyright (c) 2020 Jesse Mazur
